@@ -1,4 +1,4 @@
-const jsonData={
+export const jsonData={
   "title": "Pemphigus vs Bullous Pemphigoid",
   "blocks": [
     {

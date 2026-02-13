@@ -1,10 +1,16 @@
 import React from 'react'
+import { BlockRenderer } from '../../components/BlockRenderer'
+import { jsonData } from '../../const/jsonData'
 
 type Props = {}
 
 const Home = (props: Props) => {
   return (
-    <div className='font-bold text-green-500'>Home</div>
+    <div>
+      {jsonData.blocks.map((block, index) => {
+        return <BlockRenderer key={index} block={block} />
+      })}
+    </div>
   )
 }
 
