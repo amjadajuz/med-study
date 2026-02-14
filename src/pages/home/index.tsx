@@ -8,14 +8,21 @@ const Home = () => {
     const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Check for system preference or saved preference
-    const isDark =
-      localStorage.getItem("theme") === "dark" ||
-      (!localStorage.getItem("theme") &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // Check for saved preference first, then system preference
+    const savedTheme = localStorage.getItem("theme");
+    let isDark = false;
+
+    if (savedTheme) {
+      isDark = savedTheme === "dark";
+    } else {
+      isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+
     setDarkMode(isDark);
     if (isDark) {
       document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 
@@ -46,7 +53,7 @@ const Home = () => {
   };
 
   return (
-    <div className='bg-background w-[100vw]'>
+    <div className='bg-background text-foreground w-full min-h-screen transition-colors duration-200'>
       <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} scrollbarProgress={scrollProgress} />
       <div className='px-[20vw] py-10'>
       {jsonData.blocks.map((block, index) => {
