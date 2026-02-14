@@ -1,13 +1,9 @@
-import CalloutBlock  from "./CalloutBlock.tsx";
-import CodeBlock  from "./CodeBlock.tsx";
-import  ComparisonBlock  from "./ComparisonBlock.tsx";
-import  DividerBlock  from "./DividerBlock.tsx";
-import  HeadingBlock  from "./HeadingBlock.tsx";
-import  ImageBlock  from "./ImageBlock.tsx";
-import  ListBlock  from "./ListBlock.tsx";
-import  ParagraphBlock  from "./ParagraphBlock.tsx";
-import  QuizBlock  from "./QuizBlock.tsx";
-import  TableBlock  from "./TableBlock.tsx";
+import CalloutBlock from "./CalloutBlock.tsx";
+import ComparisonBlock from "./ComparisonBlock.tsx";
+import FlashCard from "./FlashCard.tsx";
+import HeadingBlock from "./HeadingBlock.tsx";
+import { ListBlock } from "./ListBlock.tsx";
+import { ParagraphBlock } from "./ParagraphBlock.tsx";
 
 export type Block =
   | { type: "heading"; level: 1 | 2 | 3 | 4; text: string }
@@ -22,29 +18,14 @@ export type Block =
         items: Array<{ label: string; value: string }>;
       }>;
     }
-  | { type: "callout"; calloutType: "info" | "warning" | "tip" | "note"; content: string }
+  | { type: "callout"; style: "info" | "warning" | "tip" | "note"; content: string }
   | {
       type: "list";
       ordered: boolean;
-      items: Array<{ text: string; nested?: Array<{ text: string }> }>;
+      items: string[];
     }
-  | {
-      type: "table";
-      headers: string[];
-      rows: Array<{ cells: string[] }>;
-    }
-  | { type: "code"; language?: string; code: string }
-  | {
-      type: "quiz";
-      question: string;
-      options: Array<{
-        text: string;
-        correct: boolean;
-        explanation?: string;
-      }>;
-    }
-  | { type: "divider" }
-  | { type: "image"; src: string; alt: string; caption?: string };
+  | { type: "mnemonic"; title: string; letters: Array<{ letter: string; expansion: string }> }
+  | {type:"flashcard"; front:string; back:string; tags:string[] };
 
 interface BlockRendererProps {
   block: Block;
@@ -59,19 +40,11 @@ export function BlockRenderer({ block }: BlockRendererProps) {
     case "comparison":
       return <ComparisonBlock columns={block.columns} />;
     case "callout":
-      return <CalloutBlock type={block.calloutType} content={block.content} />;
+      return <CalloutBlock type={block.style} content={block.content} />;
     case "list":
       return <ListBlock ordered={block.ordered} items={block.items} />;
-    case "table":
-      return <TableBlock headers={block.headers} rows={block.rows} />;
-    case "code":
-      return <CodeBlock language={block.language} code={block.code} />;
-    case "quiz":
-      return <QuizBlock question={block.question} options={block.options} />;
-    case "divider":
-      return <DividerBlock />;
-    case "image":
-      return <ImageBlock src={block.src} alt={block.alt} caption={block.caption} />;
+    case "flashcard":
+      return <FlashCard front={block.front} back={block.back} tags={block.tags} />;
     default:
       return null;
   }

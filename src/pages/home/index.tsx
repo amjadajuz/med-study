@@ -1,10 +1,7 @@
-import React from 'react'
 import { BlockRenderer } from '../../components/BlockRenderer'
 import { jsonData } from '../../const/jsonData'
 
-type Props = {}
-
-const Home = (props: Props) => {
+const Home = () => {
   return (
     <div>
       {jsonData.blocks.map((block, index) => {

@@ -1,22 +1,30 @@
-import React from 'react'
-
-type Props = {
-    content:{
-    text: string;
-    bold?: boolean | undefined;
-    italic?: boolean | undefined;
-}[];
+interface TextSegment {
+  text: string;
+  bold?: boolean;
+  italic?: boolean;
 }
 
-const ParagraphBlock = (props: Props) => {
+interface ParagraphBlockProps {
+  content: TextSegment[];
+}
+
+export const ParagraphBlock = ({ content }: ParagraphBlockProps) => {
   return (
-    <div className="paragraph-block">
-      {props.content.map((item, index) => (
-        <span key={index} className={item.bold ? "bold" : ""}>
-          {item.text}
-        </span>
-      ))}
-    </div>
-  )
+    <p className="leading-[1.7] mb-4 text-[1.0625rem] text-foreground/90">
+      {content.map((segment, index) => {
+        const className = [
+          segment.bold && "font-semibold text-foreground",
+          segment.italic && "italic",
+        ]
+          .filter(Boolean)
+          .join(" ");
+
+        return (
+          <span key={index} className={className || undefined}>
+            {segment.text}
+          </span>
+        );
+      })}
+    </p>
+  );
 }
-export default ParagraphBlock
