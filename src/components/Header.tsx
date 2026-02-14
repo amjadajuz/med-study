@@ -12,7 +12,7 @@ const Header = ({ toggleDarkMode, darkMode, scrollbarProgress }: Props) => {
     <header className="sticky top-0 w-full h-[50px] px-[20vw] bg-background text-foreground flex items-center border-b border-border">
       <div className="flex justify-between w-full">
         Header
-        <button onClick={toggleDarkMode}>
+        <button onClick={toggleDarkMode} className="cursor-pointer">
           {!darkMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
         </button>   
       </div>
