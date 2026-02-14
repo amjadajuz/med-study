@@ -9,7 +9,7 @@ type Props = {
 
 const Header = ({ toggleDarkMode, darkMode, scrollbarProgress }: Props) => {
   return (
-    <header className="sticky top-0 w-full h-[50px] px-[20vw] bg-background text-foreground flex items-center ">
+    <header className="sticky top-0 w-full h-[50px] px-[20vw] bg-background text-foreground flex items-center border-b border-border">
       <div className="flex justify-between w-full">
         Header
         <button onClick={toggleDarkMode}>

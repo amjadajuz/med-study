@@ -18,7 +18,7 @@ export type Block =
         items: Array<{ label: string; value: string }>;
       }>;
     }
-  | { type: "callout"; style: "info" | "warning" | "tip" | "note"; content: string }
+  | { type: "callout"; style: "info" | "warning" | "tip" | "note"; title: string; text: string }
   | {
       type: "list";
       ordered: boolean;
@@ -40,7 +40,7 @@ export function BlockRenderer({ block }: BlockRendererProps) {
     case "comparison":
       return <ComparisonBlock columns={block.columns} />;
     case "callout":
-      return <CalloutBlock type={block.style} content={block.content} />;
+      return <CalloutBlock type={block.style} title={block.title} text={block.text} />;
     case "list":
       return <ListBlock ordered={block.ordered} items={block.items} />;
     case "flashcard":

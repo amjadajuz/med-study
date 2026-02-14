@@ -13,27 +13,28 @@ const FlashCard = (props: Props) => {
     setIsFlipped(!isFlipped);
   };
   return (
-    <div className="border rounded-lg p-4 shadow-sm" onClick={handleFlip}>
-        <div  className={`relative w-full min-h-[200px] transition-transform duration-500 transform-style-3d cursor-pointer ${
-            isFlipped ? "rotate-y-180" : ""
-          }`}>
-            <h3 className="text-lg font-semibold mb-2">Front</h3>
-            <p className="text-gray-700">{props.front}</p>
+    <div className={`flip-card-container ${isFlipped ? "flipped" : ""}`} onClick={handleFlip}>
+      <div className="flip-card-inner">
+        <div className="flip-card-front border-b bg-background text-foreground border rounded-lg shadow-sm cursor-pointer">
+          <h3 className="text-lg font-semibold mb-2">Question:</h3>
+          <p>{props.front}</p>
+          <div className="p-4 bg-background text-foreground">
+        <h3 className="text-lg font-semibold mb-2">Tags</h3>
+        <div className="flex flex-wrap gap-2">
+          {props.tags.map((tag, index) => (
+            <span key={index} className="bg-accent text-primary px-2 py-1 rounded-full text-sm font-medium">
+              {tag}
+            </span>
+          ))}
         </div>
-        <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">Back</h3>
-            <p className="text-gray-700">{props.back}</p>
+      </div>
         </div>
-        <div>
-            <h3 className="text-lg font-semibold mb-2">Tags</h3>
-            <div className="flex flex-wrap gap-2">
-                {props.tags.map((tag, index) => (
-                    <span key={index} className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">
-                        {tag}
-                    </span>
-                ))}
-            </div>
+        <div className="flip-card-back border-b bg-secondary text-primary rounded-lg">
+          <h3 className="text-lg font-semibold mb-2">Answer:</h3>
+          <p>{props.back}</p>
         </div>
+      </div>
+      
     </div>
   )
 }

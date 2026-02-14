@@ -1,10 +1,11 @@
 
 type Props = {
     type: "warning" | "tip" | "info" | "note";
-    content:string
+    text:string;
+    title:string;
 }
 
-const CalloutBlock = ({ type, content }: Props) => {
+const CalloutBlock = ({ type, title, text }: Props) => {
   const styles = {
     info: {
       bg: "bg-blue-50 dark:bg-blue-950/30",
@@ -42,8 +43,8 @@ const CalloutBlock = ({ type, content }: Props) => {
       >
         {style.icon}
       </div>
-      <div className="flex-1 text-[0.9375rem] leading-[1.7] text-black">
-        {content}
+      <div className="flex-1 text-[0.9375rem] leading-[1.7] text-foreground">
+        {text}
       </div>
     </div>
   )
