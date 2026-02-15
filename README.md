@@ -121,6 +121,55 @@ type Block =
 3. **Lazy Loading** - Skeleton loaders provide visual feedback during loading
 4. **Component Extraction** - Render functions extracted outside components to prevent unnecessary recreation
 
+## 🎣 Custom Hooks
+
+### `useDarkMode`
+Manages dark/light theme state with localStorage persistence.
+
+**Features:**
+- Detects system color scheme preference on first load
+- Saves user preference to localStorage
+- Applies `dark` class to document root for Tailwind dark mode
+- Smooth transitions between themes
+
+**Usage:**
+```typescript
+const { darkMode, setDarkMode } = useDarkMode();
+
+const toggleDarkMode = () => {
+  setDarkMode(!darkMode);
+  if (!darkMode) {
+    document.documentElement.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+  }
+};
+```
+
+### `useScrollPosition`
+Tracks scroll progress for the header's visual progress indicator.
+
+**Features:**
+- Calculates scroll progress as a percentage (0-100%)
+- Uses `requestAnimationFrame` for performant scroll tracking
+- Properly cleans up event listeners and animation frames
+- Returns smooth, batched visual updates
+
+**Usage:**
+```typescript
+const { scrollProgress } = useScrollPosition();
+// scrollProgress value is used in Header to show visual scroll indicator
+<div style={{ width: `${scrollProgress}%` }}></div>
+```
+
+**Why These Hooks:**
+- **Separation of Concerns** - Logic separated from UI components
+- **Reusability** - Can be used in multiple components without duplication
+- **Testability** - Hooks can be tested independently
+- **Cleaner Components** - Components focus only on rendering
+
 ## 🔮 Future Improvements (Given More Time)
 
 ### High Priority
