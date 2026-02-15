@@ -3,12 +3,10 @@
 :root {
   color-scheme: light;
   --color-primary: #1e40af;
-  --color-secondary: #c7d4f7;
+  --color-secondary: rgb(37, 47, 76);
   --color-tertiary: #ea82a5;
   --color-background: #f8fafc;
   --color-foreground: #111827;
-  --color-muted: #e2e8f0;
-  --color-muted-foreground: #64748b;
   --color-accent: #0ea5e9;
   --color-border: #d4dce6;
 }
@@ -20,9 +18,7 @@
   --color-tertiary: #ea82a5;
   --color-background: #0f172a;
   --color-foreground: #f1f5f9;
-  --color-muted: #1e293b;
-  --color-muted-foreground: #000000;
-  --color-accent: #06b6d4;
+  --color-accent: #00758a;
   --color-border: #354155;
 }
 
@@ -32,41 +28,6 @@
   --color-tertiary: var(--color-tertiary);
   --color-background: var(--color-background);
   --color-foreground: var(--color-foreground);
-  --color-muted: var(--color-muted);
-  --color-muted-foreground: var(--color-muted-foreground);
   --color-accent: var(--color-accent);
   --color-border: var(--color-border);
-}
-
-/* FlashCard 3D Flip Styles */
-.flip-card-container {
-  perspective: 1000px;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 285px;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
-
-.flip-card-container.flipped .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.5rem;
-}
-
-.flip-card-back {
-  transform: rotateY(180deg);
 }
