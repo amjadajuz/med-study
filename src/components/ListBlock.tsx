@@ -37,7 +37,7 @@ export const ListBlock = ({ ordered, items }: ListBlockProps) => {
           </>
         ) : (
           <div className="flex items-start">
-            <ArrowBigRight color="var(--color-primary)" />
+            <ArrowBigRight size={24} color="var(--color-primary)" />
             <span className="ml-2">{item}</span>
           </div>
         )}
