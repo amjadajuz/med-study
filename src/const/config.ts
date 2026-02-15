@@ -1,0 +1,12 @@
+export const TIMINGS = {
+  INITIAL_LOAD_DELAY: 2000,
+};
+
+export const UI = {
+  LIST_PREVIEW_COUNT: 3,
+  HEADER_HEIGHT: "50px",
+  HEADER_PADDING_X: "5%",
+  HEADER_PADDING_X_MD: "20%",
+  CONTENT_PADDING_X: "5%",
+  CONTENT_PADDING_X_MD: "20%",
+};

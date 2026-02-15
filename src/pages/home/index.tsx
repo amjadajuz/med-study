@@ -3,6 +3,8 @@ import { BlockRenderer } from '../../components/BlockRenderer'
 import Header from '../../components/Header'
 import { jsonData } from '../../const/jsonData'
 import SkeletonLoader from '../../components/SkeletonLoader';
+import type { Block } from '../../types/blocks';
+import { TIMINGS } from '../../const/config';
 
 const Home = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -31,22 +33,30 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); 
+    }, TIMINGS.INITIAL_LOAD_DELAY); 
+    
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    // Track scroll progress
+    let animationFrameId: number;
+
     const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.scrollY;
-      const maxScroll = documentHeight - windowHeight;
-      const progress = (scrollTop / maxScroll) * 100;
-      setScrollProgress(Math.min(progress, 100));
+      animationFrameId = requestAnimationFrame(() => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY;
+        const maxScroll = documentHeight - windowHeight;
+        const progress = (scrollTop / maxScroll) * 100;
+        setScrollProgress(Math.min(progress, 100));
+      });
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   const toggleDarkMode = () => {
@@ -66,21 +76,22 @@ const Home = () => {
     
     <div className="px-[5%] md:px-[20%] py-10">
       {isLoading ? (
-      <div className='flex flex-col gap-[24px]'>
-        <SkeletonLoader width="100%" height="48px" variant="text" />
-        <SkeletonLoader width="100%" height="72px" variant="text" />
-        <div className='flex gap-[16px]'>
-          <SkeletonLoader width="50%" height="200px" variant="text" />
-          <SkeletonLoader width="50%" height="200px" variant="text" />
+        <div className='flex flex-col gap-[24px]'>
+          <SkeletonLoader width="100%" height="48px" variant="text" />
+          <SkeletonLoader width="100%" height="72px" variant="text" />
+          <div className='flex gap-[16px]'>
+            <SkeletonLoader width="50%" height="200px" variant="text" />
+            <SkeletonLoader width="50%" height="200px" variant="text" />
+          </div>
         </div>
-      </div>) : (
-      <>
-      {jsonData.blocks.map((block, index) => {
-        return <BlockRenderer key={index} block={block as any} />
-      })}
-      </>)}
-      
-      </div>
+      ) : (
+        <>
+          {(jsonData.blocks as Block[]).map((block, index) => (
+            <BlockRenderer key={index} block={block} />
+          ))}
+        </>
+      )}
+    </div>
     </div>
   )
 }

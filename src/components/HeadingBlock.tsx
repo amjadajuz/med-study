@@ -1,11 +1,11 @@
-import React, { JSX } from 'react'
+import { JSX } from 'react'
 
-type Props = {
-    level: number;
-    text:string;
+interface HeadingBlockProps {
+  level: 1 | 2 | 3 | 4;
+  text: string;
 }
 
-const HeadingBlock = ({ level, text }: Props) => {
+const HeadingBlock = ({ level, text }: HeadingBlockProps) => {
   const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
   
   const classes = {

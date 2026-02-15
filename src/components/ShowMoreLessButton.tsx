@@ -1,14 +1,13 @@
-import React from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-type Props = {
+interface ShowMoreLessButtonProps {
   expanded: boolean;
   remaining?: number;
   onToggle: () => void;
   className?: string;
-};
+}
 
-const ShowMoreLessButton = ({ expanded, remaining = 0, onToggle, className = "" }: Props) => {
+const ShowMoreLessButton = ({ expanded, remaining = 0, onToggle, className = "" }: ShowMoreLessButtonProps) => {
   return (
     <button
       onClick={onToggle}
