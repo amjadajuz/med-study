@@ -38,8 +38,8 @@ const FlashCard = (props: Props) => {
             </div>
           </div>
           <div className="flex items-center justify-center gap-2 pt-4 border-t border-border/50 mt-4 text-[0.875rem] text-muted-foreground">
-            <RotateCw className="w-4 h-4" />
-            <span>Click to reveal answer</span>
+            <RotateCw className="w-4 h-4" color="var(--color-foreground)" />
+            <span className="text-foreground">Click to reveal answer</span>
           </div>
         </div>
         <div className="flip-card-back border-b bg-secondary text-primary rounded-lg flex flex-col justify-between cursor-pointer">
