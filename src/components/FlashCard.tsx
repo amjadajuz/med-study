@@ -23,7 +23,7 @@ const FlashCard = (props: Props) => {
           <div>
             <h3 className="text-lg font-semibold mb-2">Question:</h3>
             <p>{props.front}</p>
-            <div className="p-4 bg-background text-foreground">
+            <div className="bg-background text-foreground">
               <h3 className="text-lg font-semibold mb-2">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {props.tags.map((tag, index) => (
@@ -42,7 +42,7 @@ const FlashCard = (props: Props) => {
             <span>Click to reveal answer</span>
           </div>
         </div>
-        <div className="flip-card-back border-b bg-secondary text-primary rounded-lg flex flex-col justify-between p-4 cursor-pointer">
+        <div className="flip-card-back border-b bg-secondary text-primary rounded-lg flex flex-col justify-between cursor-pointer">
           <div>
             <h3 className="text-lg font-semibold mb-2">Answer:</h3>
             <p>{props.back}</p>
