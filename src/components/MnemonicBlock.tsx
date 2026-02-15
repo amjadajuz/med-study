@@ -23,9 +23,9 @@ export const MnemonicBlock = ({ title, letters }: MnemonicBlockProps) => {
         {letters.map((item, index) => (
           <div
             key={index}
-            className="flex items-start gap-4 p-3 rounded-lg bg-card/50 border border-border hover:border-primary transition-colors"
+            className="flex items-center gap-4 p-3 rounded-lg bg-card/50 border border-border hover:bg-border cursor-pointer transition-colors"
           >
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center shadow-sm">
+            <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center shadow-sm bg-background">
               <span className="text-primary text-[1.5rem] text-transparent [-webkit-text-stroke:1px_theme(colors.primary)]">
                 {item.letter}
               </span>
