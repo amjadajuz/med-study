@@ -2,14 +2,15 @@ import { calloutStyles } from "../const/styleVariants";
 
 interface CalloutBlockProps {
   type: "warning" | "tip" | "info" | "note";
+  title: string;
   text: string;
 }
 
-const CalloutBlock = ({ type, text }: CalloutBlockProps) => {
+const CalloutBlock = ({ type, title, text }: CalloutBlockProps) => {
   const style = calloutStyles[type];
   return (
      <div
-      className={`my-6 rounded-lg border ${style.border} ${style.bg} p-5 flex gap-4`}
+      className={`my-6 rounded-lg border ${style.border} ${style.bg} p-5 flex gap-4 items-start`}
     >
       <div
         className={`flex-shrink-0 w-8 h-8 rounded-md ${style.iconBg} flex items-center justify-center text-lg`}
@@ -17,6 +18,7 @@ const CalloutBlock = ({ type, text }: CalloutBlockProps) => {
         {style.icon}
       </div>
       <div className="flex-1 text-[0.9375rem] leading-[1.7] text-foreground">
+        <h3 className="font-semibold">{title}</h3>
         {text}
       </div>
     </div>

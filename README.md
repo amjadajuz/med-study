@@ -1,16 +1,160 @@
-# React + Vite
+# Med-Study 📚
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React-based interactive platform for medical education, featuring rich content blocks, dark mode support, and responsive design.
 
-Currently, two official plugins are available:
+## 🚀 Build & Run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
+- Node.js 20.19
+- npm
 
-## React Compiler
+### Development
+```bash
+npm install
+npm run dev
+```
+The app will start at `http://localhost:5173/med-study`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Production Build
+```bash
+npm run build
+```
 
-## Expanding the ESLint configuration
+### Deploy
+```bash
+npm run deploy
+```
+Deploys to GitHub Pages at `https://yourusername.github.io/med-study`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Linting
+```bash
+npm lint
+```
+
+## 🏗️ Architecture Decisions
+
+### Component-Based Organization
+Components are organized by responsibility:
+- **`blocks/`** - Content block types (Heading, Paragraph, Comparison, etc.)
+- **`common/`** - Shared UI components (Header, ShowMoreLessButton, SkeletonLoader)
+- **`BlockRenderer.tsx`** - Router that maps block types to components
+
+**Why:** Separation of concerns makes it easy to add new block types independently. Each block is a self-contained, reusable unit.
+
+### Type System
+- **`src/types/blocks.ts`** - Complete `Block` union type definition
+  - Centralized, single source of truth
+  - Prevents type duplication across components
+  - Enables type-safe block rendering
+
+**Why:** A union type ensures only valid block structures can be created, catching errors at compile time rather than runtime.
+
+### Configuration & Constants
+- **`src/const/config.ts`** - UI timings and layout dimensions
+- **`src/const/styleVariants.ts`** - Reusable color/style objects
+- **`src/const/jsonData.ts`** - Sample content (can be replaced with API calls)
+
+**Why:** Extracting magic numbers and style definitions makes the codebase:
+- DRY (Don't Repeat Yourself)
+- Easy to theme/customize globally
+- Testable without changing component code
+
+## 🎨 Styling Approach
+
+### Tailwind CSS + CSS Variables
+We use **Tailwind CSS 4** with custom CSS variables for theming:
+
+```css
+/* theme.css */
+:root {
+  --color-primary: #1e40af;
+  --color-secondary: rgb(37, 47, 76);
+  --color-tertiary: #ea82a5;
+  --color-background: #f8fafc;
+  --color-foreground: #111827;
+  --color-accent: #0ea5e9;
+  --color-border: #d4dce6;
+}
+
+.dark {
+  /* Dark mode overrides */
+}
+```
+
+**Why this approach:**
+1. **Flexibility** - Colors adapt to light/dark mode instantly
+2. **Consistency** - Semantic color names (primary, secondary) instead of arbitrary colors
+3. **Dark Mode** - Using CSS variables makes theme switching effortless
+4. **Component Utilities** - `@layer components` defines reusable classes (`.card-base`, `.flex-center`)
+5. **Small Bundle** - Tailwind's utility-first approach generates only used CSS
+
+### Dark Mode Implementation
+- Uses system preference as default
+- Saves user choice to localStorage
+- Smooth transitions between modes
+- Accessible button with proper ARIA labels
+
+## 📊 Content Structure
+
+Content is defined as **composable blocks**:
+
+```typescript
+type Block = 
+  | { type: "heading"; level: 1-4; text: string }
+  | { type: "paragraph"; content: Array<{text, bold?, italic?}> }
+  | { type: "comparison"; columns: Array<{title, items}> }
+  | { type: "callout"; style: "info"|"warning"|"tip"|"note"; text: string }
+  | { type: "list"; ordered: boolean; items: string[] }
+  | { type: "mnemonic"; title: string; letters: Array<{letter, expansion}> }
+  | { type: "flashcard"; front: string; back: string; tags: string[] }
+```
+
+**Why:** This design allows:
+- Adding new block types without touching `BlockRenderer`
+- Server-rendering structured content
+- Easy migration from JSON to database-driven content
+
+## ⚡ Performance Optimizations
+
+1. **Scroll Listener Optimization** - Uses `requestAnimationFrame` to batch visual updates
+2. **List Virtualization** - Lists show 3 items by default with "show more" to reduce DOM nodes
+3. **Lazy Loading** - Skeleton loaders provide visual feedback during loading
+4. **Component Extraction** - Render functions extracted outside components to prevent unnecessary recreation
+
+## 🔮 Future Improvements (Given More Time)
+
+### High Priority
+1. **Content Management** 
+   - Replace `jsonData.ts` with API integration (REST/GraphQL)
+   - Create admin panel for content editing
+   - Version control for content changes
+
+2. **Advanced Features**
+   - Progress tracking (user completion state per block)
+   - Search/filter across blocks
+   - Bookmarks and notes
+
+3. **Performance**
+   - Virtual list scrolling for large content
+   - Code splitting per route
+   - Data caching(We can use Tanstack query)
+   - Image optimization
+
+## 📦 Tech Stack
+
+- **React 19** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Fast build tool
+- **Tailwind CSS 4** - Utility-first styling
+- **React Router 7** - Client-side routing
+- **Lucide React** - Icon library
+- **ESLint** - Code quality
+
+## 📝 Code Quality
+
+- ✅ Full TypeScript coverage
+- ✅ ESLint configured
+- ✅ DRY principles applied
+- ✅ Semantic HTML
+- ✅ Accessible components
+- ✅ Responsive design (mobile-first)

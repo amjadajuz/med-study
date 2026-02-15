@@ -20,7 +20,7 @@ export function BlockRenderer({ block }: BlockRendererProps) {
     case "comparison":
       return <ComparisonBlock columns={block.columns} />;
     case "callout":
-      return <CalloutBlock type={block.style} title={block.title} text={block.text} />;
+      return <CalloutBlock type={block.style} text={block.text} title={block.title} />;
     case "list":
       return <ListBlock ordered={block.ordered} items={block.items} />;
     case "flashcard":
