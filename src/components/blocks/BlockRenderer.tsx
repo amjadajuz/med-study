@@ -1,11 +1,11 @@
+import type { Block } from "../../types/blocks.ts";
+import HeadingBlock from "../common/HeadingBlock.tsx";
 import CalloutBlock from "./CalloutBlock.tsx";
 import ComparisonBlock from "./ComparisonBlock.tsx";
 import FlashCard from "./FlashCard.tsx";
-import HeadingBlock from "./HeadingBlock.tsx";
 import { ListBlock } from "./ListBlock.tsx";
 import { MnemonicBlock } from "./MnemonicBlock.tsx";
 import { ParagraphBlock } from "./ParagraphBlock.tsx";
-import type { Block } from "../types/blocks";
 
 interface BlockRendererProps {
   block: Block;

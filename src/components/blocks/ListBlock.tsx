@@ -1,7 +1,7 @@
 import { ArrowBigRight } from "lucide-react";
 import { useState } from "react";
-import ShowMoreLessButton from "./ShowMoreLessButton";
-import { UI } from "../const/config";
+import { UI } from "../../const/config";
+import ShowMoreLessButton from "../common/ShowMoreLessButton";
 
 type ListItem = string;
 

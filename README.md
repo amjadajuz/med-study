@@ -142,7 +142,7 @@ type Block =
 
 ## 📦 Tech Stack
 
-- **React 19** - UI framework
+- **React 19** - UI library
 - **TypeScript** - Type safety
 - **Vite** - Fast build tool
 - **Tailwind CSS 4** - Utility-first styling

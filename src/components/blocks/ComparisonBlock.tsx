@@ -1,4 +1,4 @@
-import { colorMap } from "../const/styleVariants";
+import { colorMap } from "../../const/styleVariants";
 
 interface ComparisonBlockProps {
   columns: Array<{

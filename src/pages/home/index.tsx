@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { BlockRenderer } from '../../components/BlockRenderer'
-import Header from '../../components/Header'
+import { BlockRenderer } from '../../components/blocks/BlockRenderer'
+import Header from '../../components/common/Header'
 import { jsonData } from '../../const/jsonData'
-import SkeletonLoader from '../../components/SkeletonLoader';
+import SkeletonLoader from '../../components/common/SkeletonLoader';
 import type { Block } from '../../types/blocks';
 import { TIMINGS } from '../../const/config';
 

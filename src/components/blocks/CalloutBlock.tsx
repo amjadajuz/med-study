@@ -1,4 +1,4 @@
-import { calloutStyles } from "../const/styleVariants";
+import { calloutStyles } from "../../const/styleVariants";
 
 interface CalloutBlockProps {
   type: "warning" | "tip" | "info" | "note";
