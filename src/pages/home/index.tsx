@@ -55,7 +55,7 @@ const Home = () => {
   return (
     <div className='bg-background text-foreground w-full min-h-screen transition-colors duration-200'>
       <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} scrollbarProgress={scrollProgress} />
-      <div className='px-[20vw] py-10'>
+    <div className="px-[5%] md:px-[20vw] py-10">
       {jsonData.blocks.map((block, index) => {
         return <BlockRenderer key={index} block={block} />
       })}
