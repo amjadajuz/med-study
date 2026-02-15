@@ -34,7 +34,9 @@ const renderListItem = (item: ListItem, index: number, ordered: boolean, itemsLe
         </>
       ) : (
         <div className="flex items-start">
+          <div className="flex-shrink-0">
           <ArrowBigRight size={24} color="var(--color-primary)" />
+          </div>
           <span className="ml-2">{item}</span>
         </div>
       )}
