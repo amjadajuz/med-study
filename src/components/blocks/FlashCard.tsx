@@ -23,7 +23,7 @@ const FlashCard = ({ front, back, tags }: FlashCardProps) => {
           <div>
             <h3 className="text-lg font-semibold mb-2">Question:</h3>
             <p>{front}</p>
-            <div className="bg-background text-foreground">
+            <div className="bg-background text-foreground mt-4">
               <h3 className="text-lg font-semibold mb-2">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {tags.map((tag, index) => (
