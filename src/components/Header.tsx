@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const Header = ({ toggleDarkMode, darkMode, scrollbarProgress }: HeaderProps) => {
   return (
-    <header className="sticky top-0 w-full h-[50px] px-[5%] md:px-[20%] bg-background text-foreground flex items-center border-b border-border z-10">
+    <header className="sticky top-0 w-full h-[50px] px-[5%] md:px-[10%] lg:px-[20%] bg-background text-foreground flex items-center border-b border-border z-10">
       <div className="flex justify-between w-full py-2">
         <h1 className="text-xl font-bold">
         Header

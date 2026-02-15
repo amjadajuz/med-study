@@ -74,7 +74,7 @@ const Home = () => {
     <div className='bg-background text-foreground w-full min-h-screen transition-colors duration-200'>
       <Header toggleDarkMode={toggleDarkMode} darkMode={darkMode} scrollbarProgress={scrollProgress} />
     
-    <div className="px-[5%] md:px-[20%] py-10">
+    <div className="px-[5%] md:px-[10%] lg:px-[20%] py-10">
       {isLoading ? (
         <div className='flex flex-col gap-[24px]'>
           <SkeletonLoader width="100%" height="48px" variant="text" />
