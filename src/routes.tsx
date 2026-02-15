@@ -6,7 +6,7 @@ type Props = {}
 
 const AppRoutes = (props: Props) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/med-study">
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
