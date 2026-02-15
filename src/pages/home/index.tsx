@@ -5,30 +5,13 @@ import { jsonData } from '../../const/jsonData'
 import SkeletonLoader from '../../components/common/SkeletonLoader';
 import type { Block } from '../../types/blocks';
 import { TIMINGS } from '../../const/config';
+import useScrollPosition from '../../hooks/useScrollPosition';
+import useDarkMode from '../../hooks/useDarkMode';
 
 const Home = () => {
-    const [scrollProgress, setScrollProgress] = useState(0);
-    const [darkMode, setDarkMode] = useState(false);
+    const { scrollProgress } = useScrollPosition();
+    const { darkMode, setDarkMode } = useDarkMode();
     const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Check for saved preference first, then system preference
-    const savedTheme = localStorage.getItem("theme");
-    let isDark = false; 
-
-    if (savedTheme) {
-      isDark = savedTheme === "dark";
-    } else {
-      isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-
-    setDarkMode(isDark);
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -38,26 +21,7 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    let animationFrameId: number;
 
-    const handleScroll = () => {
-      animationFrameId = requestAnimationFrame(() => {
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-        const scrollTop = window.scrollY;
-        const maxScroll = documentHeight - windowHeight;
-        const progress = (scrollTop / maxScroll) * 100;
-        setScrollProgress(Math.min(progress, 100));
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
