@@ -3,6 +3,7 @@ import ComparisonBlock from "./ComparisonBlock.tsx";
 import FlashCard from "./FlashCard.tsx";
 import HeadingBlock from "./HeadingBlock.tsx";
 import { ListBlock } from "./ListBlock.tsx";
+import { MnemonicBlock } from "./MnemonicBlock.tsx";
 import { ParagraphBlock } from "./ParagraphBlock.tsx";
 
 export type Block =
@@ -45,6 +46,8 @@ export function BlockRenderer({ block }: BlockRendererProps) {
       return <ListBlock ordered={block.ordered} items={block.items} />;
     case "flashcard":
       return <FlashCard front={block.front} back={block.back} tags={block.tags} />;
+    case "mnemonic":
+      return <MnemonicBlock title={block.title} letters={block.letters} />;
     default:
       return null;
   }
